@@ -17,5 +17,6 @@ namespace TestingAkbas.Models
         public decimal RawFabricPrice { get; set; }
         public decimal DomesticPrice { get; set; }
         public decimal ExportPrice { get; set; }
+        public string Qualities { get; set; }
     }
 }

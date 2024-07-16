@@ -82,11 +82,9 @@ namespace TestingAkbas.Controllers
         }
 
         // POST: Fabrics/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,QualityClass,FabricCode,QualityName,QualityGroup,QualityComposition,PatternType,Width,Weight,RawFabricPrice,DomesticPrice,ExportPrice")] Fabric fabric)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,QualityClass,FabricCode,Qualities,QualityName,QualityGroup,QualityComposition,PatternType,Width,Weight,RawFabricPrice,DomesticPrice,ExportPrice")] Fabric fabric)
         {
             if (id != fabric.Id)
             {
