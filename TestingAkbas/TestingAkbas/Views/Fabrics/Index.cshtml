@@ -1,10 +1,9 @@
 ﻿@model IEnumerable<TestingAkbas.Models.Fabric>
-
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New</a>
@@ -13,18 +12,18 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.QualityClass)</th>
-            <th>@Html.DisplayNameFor(model => model.FabricCode)</th>
-            <th>@Html.DisplayNameFor(model => model.Qualities)</th>
-            <th>@Html.DisplayNameFor(model => model.QualityName)</th>
-            <th>@Html.DisplayNameFor(model => model.QualityGroup)</th>
-            <th>@Html.DisplayNameFor(model => model.QualityComposition)</th>
-            <th>@Html.DisplayNameFor(model => model.PatternType)</th>
-            <th>@Html.DisplayNameFor(model => model.Width)</th>
-            <th>@Html.DisplayNameFor(model => model.Weight)</th>
-            <th>@Html.DisplayNameFor(model => model.RawFabricPrice)</th>
-            <th>@Html.DisplayNameFor(model => model.DomesticPrice)</th>
-            <th>@Html.DisplayNameFor(model => model.ExportPrice)</th>
+            <th>Quality Class</th>
+            <th>Fabric Code</th>
+            <th>Qualities</th>
+            <th>Quality Name</th>
+            <th>Quality Group</th>
+            <th>Quality Composition</th>
+            <th>Pattern Type</th>
+            <th>Width</th>
+            <th>Weight</th>
+            <th>Raw Fabric Price</th>
+            <th>Domestic Price</th>
+            <th>Export Price</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -70,12 +69,8 @@
                 </td>
                 <td>
                     <div class="btn-group" role="group">
-                        <form asp-action="Edit" asp-route-id="@item.Id">
-                            <button type="submit" class="btn btn-warning">Edit</button>
-                        </form>
-                        <form asp-action="Details" asp-route-id="@item.Id">
-                            <button type="submit" class="btn btn-info">Details</button>
-                        </form>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
                         <form asp-action="Delete" asp-route-id="@item.Id" onsubmit="return confirm('Are you sure you want to delete this item?');">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
@@ -87,59 +82,8 @@
 </table>
 
 @section Styles {
-    <style>
-        /* QualityClass renkleri */
-        .quality-class-viscose {
-            background-color: rgba(255, 165, 0, 0.5); /* orange */
-        }
-
-        .quality-class-rayon {
-            background-color: rgba(0, 128, 0, 0.5); /* green */
-        }
-
-        .quality-class-cotton {
-            background-color: rgba(128, 0, 128, 0.5); /* purple */
-        }
-
-        .quality-class-nylon {
-            background-color: rgba(255, 255, 0, 0.5); /* yellow */
-        }
-
-        .quality-class-polyester {
-            background-color: rgba(255, 0, 0, 0.5); /* red */
-        }
-
-        .quality-class-tencel {
-            background-color: rgba(0, 0, 255, 0.5); /* blue */
-        }
-
-        .quality-class-linen {
-            background-color: rgba(173, 216, 230, 0.5); /* lightblue */
-        }
-
-        .quality-class-jacquard {
-            background-color: rgba(128, 128, 128, 0.5); /* gray */
-        }
-
-        .quality-class-mix {
-            background-color: rgba(211, 211, 211, 0.5); /* lightgray */
-        }
-
-        /* Qualities renkleri */
-        .qualities-m {
-            background-color: rgba(144, 238, 144, 0.25); /* lightgreen */
-        }
-
-        .qualities-a {
-            background-color: rgba(173, 216, 230, 0.25); /* lightblue */
-        }
-
-        .qualities-n {
-            background-color: rgba(255, 255, 224, 0.25); /* lightyellow */
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/custom.css" />
 }
-
 
 @functions {
     public string GetQualityClassCssClass(string qualityClass)
