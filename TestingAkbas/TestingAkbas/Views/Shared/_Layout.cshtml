@@ -11,13 +11,51 @@
         .quality-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px; /* Optional: space between items */
+            gap: 10px; /* Space between columns */
         }
 
-            .quality-group .list-group-item {
-                flex: 1 0 18%; /* Adjust width of each item to fit 5 per row */
+            .quality-group .list-group {
+                flex: 1; /* Each column takes equal width */
                 box-sizing: border-box;
+                width: 100%; /* Ensure each list takes full width of its container */
             }
+
+        .list-group-item {
+            display: flex;
+            align-items: center;
+            width: 100%; /* Ensure each item takes full width of its column */
+            box-sizing: border-box; /* Include padding and border in the width */
+        }
+
+        .list-group {
+            width: 100%; /* Ensure each list takes full width of its container */
+        }
+
+        /* Reduce font size for section headings */
+        h5 {
+            font-size: 14px; /* Adjust as needed */
+            margin-bottom: 1rem; /* Optional: space below the heading */
+        }
+
+        /* Reduce font size for table text */
+        .list-group-item .form-check-label {
+            font-size: 12px; /* Adjust as needed */
+        }
+
+        /* Reduce checkbox size */
+        .form-check-input {
+            width: 0.75rem; /* Adjust size as needed */
+            height: 0.75rem; /* Adjust size as needed */
+            margin-right: 0.5rem; /* Space between checkbox and label */
+            transform: scale(0.75); /* Scale down the checkbox */
+            -ms-transform: scale(0.75); /* For IE 9 */
+            -webkit-transform: scale(0.75); /* For Safari */
+        }
+
+        /* Optional: reduce padding for list items to make it more compact */
+        .list-group-item {
+            padding: 0.5rem 1rem; /* Adjust as needed */
+        }
     </style>
 </head>
 <body>
@@ -63,60 +101,69 @@
                             <div class="d-flex flex-column">
                                 <div class="p-2">
                                     <h5>ALL QUALITIES GROUP</h5>
-                                    <ul class="list-group quality-group">
-                                        <li class="list-group-item">
-                                            <input type="checkbox" name="qualityClasses" value="viscose" id="viscose" class="form-check-input" />
-                                            <label for="viscose" class="form-check-label">VISCOSE</label>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <input type="checkbox" name="qualityClasses" value="rayon" id="rayon" class="form-check-input" />
-                                            <label for="rayon" class="form-check-label">RAYON</label>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <input type="checkbox" name="qualityClasses" value="rynsignart" id="rynsignart" class="form-check-input" />
-                                            <label for="rynsignart" class="form-check-label">RYN SIGNART</label>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <input type="checkbox" name="qualityClasses" value="cotton" id="cotton" class="form-check-input" />
-                                            <label for="cotton" class="form-check-label">COTTON</label>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <input type="checkbox" name="qualityClasses" value="nylon" id="nylon" class="form-check-input" />
-                                            <label for="nylon" class="form-check-label">NYLON</label>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <input type="checkbox" name="qualityClasses" value="polyester" id="polyester" class="form-check-input" />
-                                            <label for="polyester" class="form-check-label">POLYESTER</label>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <input type="checkbox" name="qualityClasses" value="pesdouble" id="pesdouble" class="form-check-input" />
-                                            <label for="pesdouble" class="form-check-label">PES DOUBLE</label>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <input type="checkbox" name="qualityClasses" value="tencel" id="tencel" class="form-check-input" />
-                                            <label for="tencel" class="form-check-label">TENCEL</label>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <input type="checkbox" name="qualityClasses" value="modal" id="modal" class="form-check-input" />
-                                            <label for="modal" class="form-check-label">MODAL</label>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <input type="checkbox" name="qualityClasses" value="linen" id="linen" class="form-check-input" />
-                                            <label for="linen" class="form-check-label">LINEN</label>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <input type="checkbox" name="qualityClasses" value="jacquard" id="jacquard" class="form-check-input" />
-                                            <label for="jacquard" class="form-check-label">JACQUARD</label>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <input type="checkbox" name="qualityClasses" value="mix" id="mix" class="form-check-input" />
-                                            <label for="mix" class="form-check-label">MIX</label>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <input type="checkbox" name="qualityClasses" value="yarndyed" id="yarndyed" class="form-check-input" />
-                                            <label for="yarndyed" class="form-check-label">YARN DYED</label>
-                                        </li>
-                                    </ul>
+                                    <div class="quality-group">
+                                        <!-- Column 1 (5 items) -->
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <input type="checkbox" name="qualityClasses" value="viscose" id="viscose" class="form-check-input" />
+                                                <label for="viscose" class="form-check-label">VISCOSE</label>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <input type="checkbox" name="qualityClasses" value="rayon" id="rayon" class="form-check-input" />
+                                                <label for="rayon" class="form-check-label">RAYON</label>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <input type="checkbox" name="qualityClasses" value="rynsignart" id="rynsignart" class="form-check-input" />
+                                                <label for="rynsignart" class="form-check-label">RYN S.</label>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <input type="checkbox" name="qualityClasses" value="cotton" id="cotton" class="form-check-input" />
+                                                <label for="cotton" class="form-check-label">COTTON</label>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <input type="checkbox" name="qualityClasses" value="nylon" id="nylon" class="form-check-input" />
+                                                <label for="nylon" class="form-check-label">NYLON</label>
+                                            </li>
+                                        </ul>
+                                        <!-- Column 2 (5 items) -->
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <input type="checkbox" name="qualityClasses" value="polyester" id="polyester" class="form-check-input" />
+                                                <label for="polyester" class="form-check-label">POLYESTER</label>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <input type="checkbox" name="qualityClasses" value="pesdouble" id="pesdouble" class="form-check-input" />
+                                                <label for="pesdouble" class="form-check-label">PES D.</label>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <input type="checkbox" name="qualityClasses" value="tencel" id="tencel" class="form-check-input" />
+                                                <label for="tencel" class="form-check-label">TENCEL</label>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <input type="checkbox" name="qualityClasses" value="modal" id="modal" class="form-check-input" />
+                                                <label for="modal" class="form-check-label">MODAL</label>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <input type="checkbox" name="qualityClasses" value="linen" id="linen" class="form-check-input" />
+                                                <label for="linen" class="form-check-label">LINEN</label>
+                                            </li>
+                                        </ul>
+                                        <!-- Column 3 (3 items) -->
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <input type="checkbox" name="qualityClasses" value="jacquard" id="jacquard" class="form-check-input" />
+                                                <label for="jacquard" class="form-check-label">JACQUARD</label>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <input type="checkbox" name="qualityClasses" value="mix" id="mix" class="form-check-input" />
+                                                <label for="mix" class="form-check-label">MIX</label>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <input type="checkbox" name="qualityClasses" value="yarndyed" id="yarndyed" class="form-check-input" />
+                                                <label for="yarndyed" class="form-check-label">YARN D.</label>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
 
