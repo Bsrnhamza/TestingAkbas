@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TestingAkbas.Data;
 using TestingAkbas.Models;
@@ -18,12 +16,24 @@ namespace TestingAkbas.Controllers
         {
             _context = context;
         }
-
         // GET: Fabrics
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string[] qualities, string[] qualityClasses)
         {
-            return View(await _context.Fabrics.ToListAsync());
+            var fabrics = _context.Fabrics.AsQueryable();
+
+            if (qualities != null && qualities.Length > 0)
+            {
+                fabrics = fabrics.Where(f => qualities.Contains(f.Qualities));
+            }
+
+            if (qualityClasses != null && qualityClasses.Length > 0)
+            {
+                fabrics = fabrics.Where(f => qualityClasses.Contains(f.QualityClass));
+            }
+
+            return View(await fabrics.ToListAsync());
         }
+
 
         // GET: Fabrics/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -50,8 +60,6 @@ namespace TestingAkbas.Controllers
         }
 
         // POST: Fabrics/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,QualityClass,FabricCode,QualityName,QualityGroup,QualityComposition,PatternType,Width,Weight,RawFabricPrice,DomesticPrice,ExportPrice")] Fabric fabric)
@@ -84,7 +92,7 @@ namespace TestingAkbas.Controllers
         // POST: Fabrics/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,QualityClass,FabricCode,Qualities,QualityName,QualityGroup,QualityComposition,PatternType,Width,Weight,RawFabricPrice,DomesticPrice,ExportPrice")] Fabric fabric)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,QualityClass,FabricCode,QualityName,QualityGroup,QualityComposition,PatternType,Width,Weight,RawFabricPrice,DomesticPrice,ExportPrice")] Fabric fabric)
         {
             if (id != fabric.Id)
             {
@@ -138,6 +146,11 @@ namespace TestingAkbas.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var fabric = await _context.Fabrics.FindAsync(id);
+            if (fabric == null)
+            {
+                return NotFound();
+            }
+
             _context.Fabrics.Remove(fabric);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

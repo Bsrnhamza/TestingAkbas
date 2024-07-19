@@ -3,32 +3,129 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TestingAkbas</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     @RenderSection("Styles", required: false)
+    <style>
+        .quality-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px; /* Optional: space between items */
+        }
+
+            .quality-group .list-group-item {
+                flex: 1 0 18%; /* Adjust width of each item to fit 5 per row */
+                box-sizing: border-box;
+            }
+    </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TestingAkbas</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Fabrics" asp-action="Index">Fabrics</a>
-                        </li>
+                        <!-- Removed navigation items -->
                     </ul>
+                </div>
+                <div class="d-flex">
+                    <form asp-controller="Fabrics" asp-action="Index" method="get">
+                        <div class="d-flex">
+                            <!-- Filtreleme Menüsü -->
+                            <div class="d-flex flex-column mr-3">
+                                <!-- QUALITIES Filter -->
+                                <div class="p-2">
+                                    <h5>QUALITIES</h5>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <input type="checkbox" name="qualities" value="m" id="mainQualities" class="form-check-input" />
+                                            <label for="mainQualities" class="form-check-label">MAIN QUALITIES</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" name="qualities" value="a" id="archiveQualities" class="form-check-input" />
+                                            <label for="archiveQualities" class="form-check-label">ARCHIVE QUALITIES</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" name="qualities" value="n" id="newQualities" class="form-check-input" />
+                                            <label for="newQualities" class="form-check-label">NEW QUALITIES</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- ALL QUALITIES GROUP Filter -->
+                            <div class="d-flex flex-column">
+                                <div class="p-2">
+                                    <h5>ALL QUALITIES GROUP</h5>
+                                    <ul class="list-group quality-group">
+                                        <li class="list-group-item">
+                                            <input type="checkbox" name="qualityClasses" value="viscose" id="viscose" class="form-check-input" />
+                                            <label for="viscose" class="form-check-label">VISCOSE</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" name="qualityClasses" value="rayon" id="rayon" class="form-check-input" />
+                                            <label for="rayon" class="form-check-label">RAYON</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" name="qualityClasses" value="rynsignart" id="rynsignart" class="form-check-input" />
+                                            <label for="rynsignart" class="form-check-label">RYN SIGNART</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" name="qualityClasses" value="cotton" id="cotton" class="form-check-input" />
+                                            <label for="cotton" class="form-check-label">COTTON</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" name="qualityClasses" value="nylon" id="nylon" class="form-check-input" />
+                                            <label for="nylon" class="form-check-label">NYLON</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" name="qualityClasses" value="polyester" id="polyester" class="form-check-input" />
+                                            <label for="polyester" class="form-check-label">POLYESTER</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" name="qualityClasses" value="pesdouble" id="pesdouble" class="form-check-input" />
+                                            <label for="pesdouble" class="form-check-label">PES DOUBLE</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" name="qualityClasses" value="tencel" id="tencel" class="form-check-input" />
+                                            <label for="tencel" class="form-check-label">TENCEL</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" name="qualityClasses" value="modal" id="modal" class="form-check-input" />
+                                            <label for="modal" class="form-check-label">MODAL</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" name="qualityClasses" value="linen" id="linen" class="form-check-input" />
+                                            <label for="linen" class="form-check-label">LINEN</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" name="qualityClasses" value="jacquard" id="jacquard" class="form-check-input" />
+                                            <label for="jacquard" class="form-check-label">JACQUARD</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" name="qualityClasses" value="mix" id="mix" class="form-check-input" />
+                                            <label for="mix" class="form-check-label">MIX</label>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <input type="checkbox" name="qualityClasses" value="yarndyed" id="yarndyed" class="form-check-input" />
+                                            <label for="yarndyed" class="form-check-label">YARN DYED</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary">Apply Filters</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </nav>
@@ -41,7 +138,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - TestingAkbas - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
