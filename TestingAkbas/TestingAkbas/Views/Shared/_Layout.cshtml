@@ -8,54 +8,155 @@
     <link rel="stylesheet" href="~/css/site.css" />
     @RenderSection("Styles", required: false)
     <style>
+        body {
+            transform: scale(0.8); /* İçeriği %75 oranında ölçeklendirir */
+            transform-origin: 0 0; /* Ölçekleme referans noktası sol üst köşe */
+            width: 133.33%; /* Ölçekleme sonrası genişliği geri almak için */
+            height: 133.33%; /* Ölçekleme sonrası yüksekliği geri almak için */
+            overflow: auto; /* Taşmayı engeller */
+        }
+
+        /* QualityClass renkleri */
+        .quality-class-viscose {
+            background-color: rgba(255, 165, 0, 0.5); /* orange */
+        }
+
+        .quality-class-rayon {
+            background-color: rgba(0, 128, 0, 0.5); /* green */
+        }
+
+        .quality-class-rynsignart {
+            background-color: rgba(0, 128, 0, 0.5); /* green */
+        }
+
+        .quality-class-cotton {
+            background-color: rgba(128, 0, 128, 0.5); /* purple */
+        }
+
+        .quality-class-nylon {
+            background-color: rgba(255, 255, 0, 0.5); /* yellow */
+        }
+
+        .quality-class-polyester {
+            background-color: rgba(255, 0, 0, 0.5); /* red */
+        }
+
+        .quality-class-pesdouble {
+            background-color: rgba(255, 0, 0, 0.5); /* red */
+        }
+
+        .quality-class-tencel {
+            background-color: rgba(0, 0, 255, 0.5); /* blue */
+        }
+
+        .quality-class-modal {
+            background-color: rgba(0, 0, 255, 0.5); /* blue */
+        }
+
+        .quality-class-linen {
+            background-color: rgba(173, 216, 230, 0.5); /* lightblue */
+        }
+
+        .quality-class-jacquard {
+            background-color: rgba(128, 128, 128, 0.5); /* gray */
+        }
+
+        .quality-class-mix {
+            background-color: rgba(211, 211, 211, 0.5); /* lightgray */
+        }
+
+        .quality-class-yarndyed {
+            background-color: rgba(211, 211, 211, 0.5); /* lightgray */
+        }
+
+        /* Qualities renkleri */
+        .qualities-m {
+            background-color: rgba(173, 216, 230, 0.25); /*main*/
+        }
+
+        .qualities-a {
+            background-color: rgba(255, 255, 224, 0.25); /*archive*/
+        }
+
+        .qualities-n {
+            background-color: rgba(144, 238, 144, 0.25); /*new*/
+        }
+
         .quality-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px; /* Space between columns */
+            gap: 10px; /* Optional: space between items */
         }
 
-            .quality-group .list-group {
-                flex: 1; /* Each column takes equal width */
+            .quality-group ul {
+                flex: 1; /* Equal width for all columns */
                 box-sizing: border-box;
-                width: 100%; /* Ensure each list takes full width of its container */
+                list-style: none;
+                padding: 0;
+                margin: 0;
             }
 
+        /* Liste elemanları için ayarlamalar */
         .list-group-item {
             display: flex;
-            align-items: center;
-            width: 100%; /* Ensure each item takes full width of its column */
-            box-sizing: border-box; /* Include padding and border in the width */
+            align-items: center; /* Checkbox ve metni ortalar */
+            font-size: 0.75rem; /* Küçültülmüş font boyutu */
+            padding: 0.5rem; /* Küçültülmüş padding */
+            box-sizing: border-box; /* Padding ve border'ı eleman boyutlarına dahil eder */
         }
 
-        .list-group {
-            width: 100%; /* Ensure each list takes full width of its container */
+        .form-check {
+            display: flex;
+            align-items: center; /* Checkbox ve etiketleri hizalar */
+            margin-left: -1.5rem; /* Checkbox ve etiket arasındaki sağ kaymayı düzeltir ve sola kaydırır */
         }
 
-        /* Reduce font size for section headings */
-        h5 {
-            font-size: 14px; /* Adjust as needed */
-            margin-bottom: 1rem; /* Optional: space below the heading */
-        }
-
-        /* Reduce font size for table text */
-        .list-group-item .form-check-label {
-            font-size: 12px; /* Adjust as needed */
-        }
-
-        /* Reduce checkbox size */
         .form-check-input {
-            width: 0.75rem; /* Adjust size as needed */
-            height: 0.75rem; /* Adjust size as needed */
-            margin-right: 0.5rem; /* Space between checkbox and label */
-            transform: scale(0.75); /* Scale down the checkbox */
-            -ms-transform: scale(0.75); /* For IE 9 */
-            -webkit-transform: scale(0.75); /* For Safari */
+            margin: 0; /* Checkbox'ı kutu içine hizalar */
+            margin-right: 0.5rem; /* Etiket ile araya boşluk bırakır */
+            position: relative; /* Konumlandırmayı kontrol etmek için */
+            z-index: 1; /* Checkbox'ı etiketin üstünde gösterir */
         }
 
-        /* Optional: reduce padding for list items to make it more compact */
-        .list-group-item {
-            padding: 0.5rem 1rem; /* Adjust as needed */
+        .form-check-label {
+            margin: 0; /* Etiketi hizalar */
+            position: relative; /* Konumlandırmayı kontrol etmek için */
+            z-index: 0; /* Etiketin checkbox'ın altında olduğundan emin olur */
         }
+
+        .btn-custom {
+            font-size: 0.75rem; /* Küçültülmüş font boyutu */
+            padding: 0.25rem 0.5rem; /* Küçültülmüş padding */
+            border-radius: 0.25rem; /* Küçültülmüş border-radius */
+        }
+
+            .btn-custom:hover {
+                background-color: rgba(0, 0, 0, 0.1); /* Hover efekti */
+            }
+
+        .filter-btn-container {
+            position: absolute; /* Mutlak konumlandırma */
+            top: 3rem; /* Üstten 1rem mesafe */
+            right: 5rem; /* Sağdan 0 mesafe */
+            display: flex;
+            gap: 1rem; /* Butonlar arasında boşluk */
+        }
+
+        .navbar {
+            position: relative; /* İçindeki mutlak konumlandırılmış öğeleri referans alır */
+        }
+
+        .sale-price-container,
+        .price-list-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+            .sale-price-container h15,
+            .price-list-container h15 {
+                margin: 0;
+                font-size: 0.875rem; /* Küçültülmüş font boyutu */
+            }
     </style>
 </head>
 <body>
@@ -79,118 +180,180 @@
                             <div class="d-flex flex-column mr-3">
                                 <!-- QUALITIES Filter -->
                                 <div class="p-2">
-                                    <h5>QUALITIES</h5>
+                                    <h15 class="font-size-small">QUALITIES</h15>
                                     <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <input type="checkbox" name="qualities" value="m" id="mainQualities" class="form-check-input" />
-                                            <label for="mainQualities" class="form-check-label">MAIN QUALITIES</label>
+                                        <li class="list-group-item qualities-m">
+                                            <div class="form-check">
+                                                <input type="checkbox" name="qualities" value="m" id="mainQualities" class="form-check-input" />
+                                                <label for="mainQualities" class="form-check-label">MAIN QUALITIES</label>
+                                            </div>
                                         </li>
-                                        <li class="list-group-item">
-                                            <input type="checkbox" name="qualities" value="a" id="archiveQualities" class="form-check-input" />
-                                            <label for="archiveQualities" class="form-check-label">ARCHIVE QUALITIES</label>
+                                        <li class="list-group-item qualities-a">
+                                            <div class="form-check">
+                                                <input type="checkbox" name="qualities" value="a" id="archiveQualities" class="form-check-input" />
+                                                <label for="archiveQualities" class="form-check-label">ARCHIVE QUALITIES</label>
+                                            </div>
                                         </li>
-                                        <li class="list-group-item">
-                                            <input type="checkbox" name="qualities" value="n" id="newQualities" class="form-check-input" />
-                                            <label for="newQualities" class="form-check-label">NEW QUALITIES</label>
+                                        <li class="list-group-item qualities-n">
+                                            <div class="form-check">
+                                                <input type="checkbox" name="qualities" value="n" id="newQualities" class="form-check-input" />
+                                                <label for="newQualities" class="form-check-label">NEW QUALITIES</label>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
 
                             <!-- ALL QUALITIES GROUP Filter -->
-                            <div class="d-flex flex-column">
+                            <div class="d-flex flex-column mr-3">
                                 <div class="p-2">
-                                    <h5>ALL QUALITIES GROUP</h5>
+                                    <h15 class="font-size-small">ALL QUALITIES GROUP</h15>
                                     <div class="quality-group">
                                         <!-- Column 1 (5 items) -->
                                         <ul class="list-group">
-                                            <li class="list-group-item">
-                                                <input type="checkbox" name="qualityClasses" value="viscose" id="viscose" class="form-check-input" />
-                                                <label for="viscose" class="form-check-label">VISCOSE</label>
+                                            <li class="list-group-item quality-class-viscose">
+                                                <div class="form-check">
+                                                    <input type="checkbox" name="qualityClasses" value="viscose" id="viscose" class="form-check-input" />
+                                                    <label for="viscose" class="form-check-label">VISCOSE</label>
+                                                </div>
                                             </li>
-                                            <li class="list-group-item">
-                                                <input type="checkbox" name="qualityClasses" value="rayon" id="rayon" class="form-check-input" />
-                                                <label for="rayon" class="form-check-label">RAYON</label>
+                                            <li class="list-group-item quality-class-rayon">
+                                                <div class="form-check">
+                                                    <input type="checkbox" name="qualityClasses" value="rayon" id="rayon" class="form-check-input" />
+                                                    <label for="rayon" class="form-check-label">RAYON</label>
+                                                </div>
                                             </li>
-                                            <li class="list-group-item">
-                                                <input type="checkbox" name="qualityClasses" value="rynsignart" id="rynsignart" class="form-check-input" />
-                                                <label for="rynsignart" class="form-check-label">RYN S.</label>
+                                            <li class="list-group-item quality-class-rynsignart">
+                                                <div class="form-check">
+                                                    <input type="checkbox" name="qualityClasses" value="rynsignart" id="rynsignart" class="form-check-input" />
+                                                    <label for="rynsignart" class="form-check-label">RYN S.</label>
+                                                </div>
                                             </li>
-                                            <li class="list-group-item">
-                                                <input type="checkbox" name="qualityClasses" value="cotton" id="cotton" class="form-check-input" />
-                                                <label for="cotton" class="form-check-label">COTTON</label>
+                                            <li class="list-group-item quality-class-cotton">
+                                                <div class="form-check">
+                                                    <input type="checkbox" name="qualityClasses" value="cotton" id="cotton" class="form-check-input" />
+                                                    <label for="cotton" class="form-check-label">COTTON</label>
+                                                </div>
                                             </li>
-                                            <li class="list-group-item">
-                                                <input type="checkbox" name="qualityClasses" value="nylon" id="nylon" class="form-check-input" />
-                                                <label for="nylon" class="form-check-label">NYLON</label>
+                                            <li class="list-group-item quality-class-nylon">
+                                                <div class="form-check">
+                                                    <input type="checkbox" name="qualityClasses" value="nylon" id="nylon" class="form-check-input" />
+                                                    <label for="nylon" class="form-check-label">NYLON</label>
+                                                </div>
                                             </li>
                                         </ul>
                                         <!-- Column 2 (5 items) -->
                                         <ul class="list-group">
-                                            <li class="list-group-item">
-                                                <input type="checkbox" name="qualityClasses" value="polyester" id="polyester" class="form-check-input" />
-                                                <label for="polyester" class="form-check-label">POLYESTER</label>
+                                            <li class="list-group-item quality-class-polyester">
+                                                <div class="form-check">
+                                                    <input type="checkbox" name="qualityClasses" value="polyester" id="polyester" class="form-check-input" />
+                                                    <label for="polyester" class="form-check-label">POLYESTER</label>
+                                                </div>
                                             </li>
-                                            <li class="list-group-item">
-                                                <input type="checkbox" name="qualityClasses" value="pesdouble" id="pesdouble" class="form-check-input" />
-                                                <label for="pesdouble" class="form-check-label">PES D.</label>
+                                            <li class="list-group-item quality-class-pesdouble">
+                                                <div class="form-check">
+                                                    <input type="checkbox" name="qualityClasses" value="pesdouble" id="pesdouble" class="form-check-input" />
+                                                    <label for="pesdouble" class="form-check-label">PES D.</label>
+                                                </div>
                                             </li>
-                                            <li class="list-group-item">
-                                                <input type="checkbox" name="qualityClasses" value="tencel" id="tencel" class="form-check-input" />
-                                                <label for="tencel" class="form-check-label">TENCEL</label>
+                                            <li class="list-group-item quality-class-tencel">
+                                                <div class="form-check">
+                                                    <input type="checkbox" name="qualityClasses" value="tencel" id="tencel" class="form-check-input" />
+                                                    <label for="tencel" class="form-check-label">TENCEL</label>
+                                                </div>
                                             </li>
-                                            <li class="list-group-item">
-                                                <input type="checkbox" name="qualityClasses" value="modal" id="modal" class="form-check-input" />
-                                                <label for="modal" class="form-check-label">MODAL</label>
+                                            <li class="list-group-item quality-class-modal">
+                                                <div class="form-check">
+                                                    <input type="checkbox" name="qualityClasses" value="modal" id="modal" class="form-check-input" />
+                                                    <label for="modal" class="form-check-label">MODAL</label>
+                                                </div>
                                             </li>
-                                            <li class="list-group-item">
-                                                <input type="checkbox" name="qualityClasses" value="linen" id="linen" class="form-check-input" />
-                                                <label for="linen" class="form-check-label">LINEN</label>
+                                            <li class="list-group-item quality-class-linen">
+                                                <div class="form-check">
+                                                    <input type="checkbox" name="qualityClasses" value="linen" id="linen" class="form-check-input" />
+                                                    <label for="linen" class="form-check-label">LINEN</label>
+                                                </div>
                                             </li>
                                         </ul>
-                                        <!-- Column 3 (3 items) -->
+                                        <!-- Column 3 (4 items) -->
                                         <ul class="list-group">
-                                            <li class="list-group-item">
-                                                <input type="checkbox" name="qualityClasses" value="jacquard" id="jacquard" class="form-check-input" />
-                                                <label for="jacquard" class="form-check-label">JACQUARD</label>
+                                            <li class="list-group-item quality-class-jacquard">
+                                                <div class="form-check">
+                                                    <input type="checkbox" name="qualityClasses" value="jacquard" id="jacquard" class="form-check-input" />
+                                                    <label for="jacquard" class="form-check-label">JACQUARD</label>
+                                                </div>
                                             </li>
-                                            <li class="list-group-item">
-                                                <input type="checkbox" name="qualityClasses" value="mix" id="mix" class="form-check-input" />
-                                                <label for="mix" class="form-check-label">MIX</label>
+                                            <li class="list-group-item quality-class-mix">
+                                                <div class="form-check">
+                                                    <input type="checkbox" name="qualityClasses" value="mix" id="mix" class="form-check-input" />
+                                                    <label for="mix" class="form-check-label">MIX</label>
+                                                </div>
                                             </li>
-                                            <li class="list-group-item">
-                                                <input type="checkbox" name="qualityClasses" value="yarndyed" id="yarndyed" class="form-check-input" />
-                                                <label for="yarndyed" class="form-check-label">YARN D.</label>
+                                            <li class="list-group-item quality-class-yarndyed">
+                                                <div class="form-check">
+                                                    <input type="checkbox" name="qualityClasses" value="yarndyed" id="yarndyed" class="form-check-input" />
+                                                    <label for="yarndyed" class="form-check-label">YARN D.</label>
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Submit Button -->
-                            <div class="d-flex align-items-end">
-                                <button type="submit" class="btn btn-primary">Apply Filters</button>
+                            <!-- PRICE LIST Filter -->
+                            <div class="price-list-container ml-3">
+                                <div class="p-2">
+                                    <h15 class="font-size-small">PRICE LIST</h15>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <div class="form-check">
+                                                <input type="checkbox" name="priceList" value="general" id="general" class="form-check-input" />
+                                                <label for="general" class="form-check-label">GENERAL</label>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="form-check">
+                                                <input type="checkbox" name="priceList" value="confection" id="confection" class="form-check-input" />
+                                                <label for="confection" class="form-check-label">CONFECTION</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
+                            <!-- SALE PRICE Filter -->
+                            <div class="sale-price-container ml-3">
+                                <div class="p-2">
+                                    <h15 class="font-size-small">SALE PRICE</h15>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <div class="form-check">
+                                                <input type="checkbox" name="salePrice" value="low" id="lowPrice" class="form-check-input" />
+                                                <label for="lowPrice" class="form-check-label">DOMESTIC</label>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="form-check">
+                                                <input type="checkbox" name="salePrice" value="high" id="highPrice" class="form-check-input" />
+                                                <label for="highPrice" class="form-check-label">EXPORT</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter-btn-container">
+                            <button type="submit" class="btn btn-custom btn-primary">Apply Filters</button>
                         </div>
                     </form>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
